@@ -1,0 +1,223 @@
+/* Jelle Mul
+11402148 */
+
+body {
+  background-color: lightblue;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#container {
+  width: 1200px;
+  height: 1200px;
+  margin: auto;
+  background-color: rgb(89,152,229)
+}
+
+#wrapper-left {
+  float: left;
+}
+
+#wraper-right {
+  float:right;
+}
+
+#navbar {
+  width: 100%;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #003399;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: blue;
+}
+
+#buttons {
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  float: right;
+  width: 70%;
+  text-align: center;
+  background-color: #003399;
+}
+
+#Original {
+  align: right;
+}
+
+button {
+    background-color: #003399; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: blue;
+}
+
+#map {
+  width: 70%;
+  height: 400px;
+  background-color: grey;
+  float: right;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 0px;
+}
+
+img {
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  max-width: 50%;
+  max-height: 30%;
+}
+
+.marker {
+  fill: brown;
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.marker2 {
+  fill: blue;
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.marker:hover {
+  cursor: pointer;
+}
+
+.marker2:hover {
+  cursor: pointer;
+}
+
+.line:hover {
+  cursor: pointer;
+}
+
+.transactions {
+  background-color: rgba(0,0,0);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
+#dashboard {
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+  float: right;
+}
+
+#tablediv {
+  margin-left: 25px;
+  margin-top: 50px;
+  float: left;
+}
+
+path {  stroke: #fff; }
+path:hover {  opacity:0.8; }
+rect:hover {  fill:blue; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  margin-bottom:76px;
+  display:inline-block;
+  border-collapse: collapse;
+  border-spacing: 0px;
+
+}
+.legend td{
+  padding:4px 5px;
+  vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+  align:right;
+  width:50px;
+}
+
+.gmnoprint img {
+  max-height: none;
+}
+
+.gm-style img {
+  max-height: none;
+}
+
+#barchart {
+  float:right;
+}
+
+#piechart {
+  float:right;
+}
+
+.styled-select {
+
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: #003399;
+   opacity: 1;
+   border: none;
+   font-family: 'Open Sans', sans-serif;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 240px;
+}
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+.blue    { background-color: #003399; }
+
+.blue select    { color: white; }
