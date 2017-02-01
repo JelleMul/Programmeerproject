@@ -69,22 +69,18 @@ d3.json("../Data/transactions-of-3-random-days.json", function(error, data) {
       return sum;
     }
 
-    // function check(obj) {
-    //   if
-    // }
-
     for (i = 0; i < timedata.length; i++) {
       total_transactions[i] = sum(timedata[i].categories)
     }
     function dashboard(id, fData){
       var barColor = 'lightgreen';
-      function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c", Entertainment:"#33a02c", Garden: "#fb9a99", Home_improvement:"#e31a1c", Ironwork:"#e31a1c", Kitchen:"#fdbf6f", Moving:"#ff7f00", Office:"#cab2d6", Party:"#6a3d9a", Photo:"#6a3d9a", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3", boormachine:"#a6cee3", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c", koningsdag:"#fb9a99", oktoberfest:"#e31a1c", partytent:"#fdbf6f", sinterklaas:"#ff7f00"}[c]; }
+      function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c", Entertainment:"#dd4477", Garden: "#fb9a99", Home_improvement:"#e31a1c", Ironwork:"#22aa99", Kitchen:"#fdbf6f", Moving:"#ff7f00", Office:"#cab2d6", Party:"#6a3d9a", Photo:"#8b0707", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3", boormachine:"#994499", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c", koningsdag:"#6633cc", oktoberfest:"#dc991f", partytent:"#fdbf6f", sinterklaas:"#dd4477"}[c]; }
 
       // compute total for each state.
       fData.forEach(function(d){d.total = sum(d.categories)});
       // function to handle histogram.
       function histoGram(fD){
-          var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 100};
+          var hG={},    hGDim = {t: 60, r: 0, b: 50, l: 100};
           hGDim.w = 550 - hGDim.l - hGDim.r,
           hGDim.h = 300- hGDim.t - hGDim.b;
 
@@ -102,7 +98,12 @@ d3.json("../Data/transactions-of-3-random-days.json", function(error, data) {
           // Add x-axis to the histogram svg.
           hGsvg.append("g").attr("class", "x axis")
               .attr("transform", "translate(0," + hGDim.h + ")")
-              .call(d3.svg.axis().scale(x).orient("bottom"));
+              .call(d3.svg.axis().scale(x).orient("bottom"))
+              .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-45)" );
 
           hGsvg.append("text")
             .attr("id", "title")
@@ -123,7 +124,7 @@ d3.json("../Data/transactions-of-3-random-days.json", function(error, data) {
 
           //create the rectangles.
           bars.append("rect")
-              .attr("x", function(d) { return x(d[0]); })
+              .attr("x", function(d) { return x(d[0])+27; })
               .attr("y", function(d) { return y(d[1]); })
               .attr("width", x.rangeBand())
               .attr("height", function(d) { return hGDim.h - y(d[1]); })
@@ -133,7 +134,7 @@ d3.json("../Data/transactions-of-3-random-days.json", function(error, data) {
 
           //Create the frequency labels above the rectangles.
           bars.append("text").text(function(d){ return d3.format(",")(d[1])})
-              .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
+              .attr("x", function(d) { return x(d[0]) +27 +x.rangeBand()/2; })
               .attr("y", function(d) { return y(d[1])-5; })
               .attr("text-anchor", "middle");
 

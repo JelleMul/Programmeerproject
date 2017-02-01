@@ -1,0 +1,64 @@
+<!--Jelle Mul
+11402148 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Peerby Go visualization</title>
+    <link rel="stylesheet" type="text/css" href="visualisation.css"/>
+    <link rel="icon" type="image/png" href="../doc/logo_peerbyGo_darkgrey_head.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="jquery.columnizer.js" type = "text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9PE7GyR-Rn9u3_ZWiTUf43-yr4hTIzC0"></script>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <a href="visualisation.html">
+          <img src="../doc/logo_peerbyGo_white.png" alt="Go to homepage"/>
+        </a>
+      </div>
+      <div id="navbar">
+        <ul>
+          <li><a href="index.html">About PeerbyGo</a></li>
+          <li><a href="visualisation.html">The visualisation</a></li>
+        </ul>
+      </div>
+
+      <div id="wrapper">
+        <div id="wrapper-left">
+          <div class="styled-select blue semi-square dropdown"></div>
+          <div id="tablediv"></div>
+        </div>
+        <div id="wrapper-right">
+          <div id="buttons">
+            <button id="Amsterdam" type="button" onclick="Zoom(52.375554, 4.895792, 12)">Zoom to Amsterdam</button>
+            <button id="Utrecht" type="button" onclick="Zoom(52.093585, 5.072312, 12)">Zoom to Utrecht</button>
+            <button id="Rotterdam" type="button" onclick="Zoom(51.933838, 4.531922, 12)">Zoom to Rotterdam</button>
+            <button id="Original" type="button" onclick="Zoom(52.161555, 4.859314, 9)">Whole map</button>
+          </div>
+          <div id="map"></div>
+          <div id="dashboard"></div>
+        </div>
+      </div>
+      <div id="visualisationinfo">
+        <p id="info">How does the visualisation work</p>
+        <div id="mapinfo">
+          <p id="info2" class="title">Map</p>
+          <p id="info3">In the map you can see all the transactions in the selected timestamp. You can select a timestamp with the dropdown menu. In the map the blue dots are the location of the owners and the red dots are the location of the renters. The line connects the owner with the renter of the same product. The zoom buttons on top of the map can be used to easily zoom in on Amsterdam, Rotterdam and Utrecht. When hovered over a point the rented product is showed in a tooltip.</p>
+        </div>
+        <div id="chartsinfo">
+          <p id="infobarchart" class="title">Barchart</p>
+          <p id="info3">The barchart showcases the amount of transactions of categories in a certain timestamp. By hovering over a bar the piechart and legend will be updated to show only the categories used in that specific timestamp.</p>
+          <p id="infopiechart" class="title">Piechart</p>
+          <p id=info3>The piechart shows the categories of all the transactions, 1 transaction can have more categories. On hover the selected category will highlight in the table, and the barchart will be updated to only show the transactions of the selected category.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="project.js"></script>
+</html>
