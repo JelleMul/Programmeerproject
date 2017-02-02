@@ -3,7 +3,7 @@
 ### 11402148
 
 ### Screenshot
-![alt text](https://github.com/JelleMul/programmeerproject/blob/master/doc/eind_screenshot.png "Voorbeeld pagina")
+![alt text](https://github.com/JelleMul/programmeerproject/blob/master/doc/eind_screenshot.PNG "screenshot pagina")
 
 ### Short description
 De vis
