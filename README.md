@@ -19,5 +19,5 @@ De staafdiagram geeft het aantal transacties van categorieën aan, dus niet het 
 Onderstaand screenshot geeft een beeld van de visualisatie zoals de pagina wordt geladen.
 ![alt text](https://github.com/JelleMul/programmeerproject/blob/master/doc/eind_screenshot.PNG "screenshot pagina")
 <br>
-Dit screenshot geeft 1 voor de tijdzone 30-07 12:00-18:00 de kaart van Amsterdam weer.
+Dit screenshot geeft voor de tijdzone 30-07 12:00-18:00 de kaart van Amsterdam weer.
 ![alt text](https://github.com/JelleMul/programmeerproject/blob/master/doc/Amsterdam.PNG "screenshot Amsterdam met 1 tijdzone")
