@@ -1,3 +1,6 @@
+// Jelle Mul
+// 11402148
+
 var map = new google.maps.Map(d3.select("#map").node(), {
   zoom: 9,
   zoomcontrol: true,

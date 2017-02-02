@@ -1,3 +1,7 @@
+// Jelle Mul
+// 11402148
+
+// sums all categories in object
 function sum( obj ) {
   var sum = 0;
   for( var el in obj ) {
@@ -11,13 +15,16 @@ function sum( obj ) {
 
 
 function dashboard(id, fData, data){
+  // set barcolor
   var barColor = 'lightgreen';
+  // set colors of categories
   function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c",
   Entertainment:"#dd4477", Garden: "#fb9a99", Home_improvement:"#e31a1c", Ironwork:"#22aa99", Kitchen:"#fdbf6f",
   Moving:"#ff7f00", Office:"#cab2d6", Party:"#6a3d9a", Photo:"#8b0707", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3",
   boormachine:"#994499", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c", koningsdag:"#6633cc",
   oktoberfest:"#dc991f", partytent:"#fdbf6f", sinterklaas:"#dd4477"}[c]; }
 
+  // function to filter data for data in pie and barchart
   function filter(d) {
     var st = fData.filter(function(s){ return s.time == d[0];})[0]
     typeList = [];
@@ -142,8 +149,6 @@ function dashboard(id, fData, data){
           bars.select("text").transition().duration(500)
               .text(function(d){ return d3.format(",")(d[1])})
               .attr("y", function(d) {return y(d[1])-5; });
-
-
       }
       return hG;
   }
@@ -171,6 +176,7 @@ function dashboard(id, fData, data){
           .style("fill", function(d) { return segColor(d.data.type); })
           .on("mouseover",mouseover).on("mouseout",mouseout);
 
+      // append title to piechart
       piesvg.append("text")
         .attr("x", 0)
         .attr("y", -160)
@@ -189,10 +195,12 @@ function dashboard(id, fData, data){
           }
         };
 
+        // create variable for pie
         var piesvg = d3.select('#piechart')
             .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
             .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
 
+        // append title to piechart
         piesvg.append("text")
           .attr("x", 0)
           .attr("y", -160)
@@ -346,6 +354,49 @@ function dashboard(id, fData, data){
       pC = pieChart(tF), // create the pie-chart.
       leg= legend(tF);  // create the legend.
 
+  function dropdown() {
+    var selector = d3.select(".dropdown")
+      .append("select")
+      .attr("id","dropdown")
+      .on("change", function(d){
+        selection = document.getElementById("dropdown");
+        if (selection.value != "All timestamps") {
+          d = []
+          for (i = 0; i < timedata.length; i++) {
+            if (timedata[i].time == selection.value) {
+              d.push(selection.value, timedata[i].total)
+            }
+          }
+
+          selected_data=filter(d)
+
+          // call update functions of pie-chart and legend.
+          if (selected_data[1].length != 0) {
+            pC.update(selected_data[1], selection.value);
+            leg.update(selected_data[1]);
+            transmap.update(data, selection.value)
+          } else {
+            pC.update(selected_data[1], "No Data to show");
+            leg.update(selected_data[1], "No Data to show");
+            transmap.update(data, "No Data to show")
+          }
+
+        } else {
+          pC.update(tF, "Frequency of categories");
+          leg.update(tF);
+          transmap.update(data, selection.value)
+        }
+      });
+    selector.selectAll("option")
+      .data(elements)
+      .enter().append("option")
+      .attr("value", function(d){
+        return d;
+      })
+      .text(function(d){
+        return d;
+      })
+  }
   var elements = []
   elements.push("All timestamps")
   for (i = 0; i < timedata.length; i++) {
@@ -353,47 +404,7 @@ function dashboard(id, fData, data){
   }
   var selection = elements[0];
 
-  var selector = d3.select(".dropdown")
-    .append("select")
-    .attr("id","dropdown")
-    .on("change", function(d){
-      selection = document.getElementById("dropdown");
-      if (selection.value != "All timestamps") {
-        d = []
-        for (i = 0; i < timedata.length; i++) {
-          if (timedata[i].time == selection.value) {
-            d.push(selection.value, timedata[i].total)
-          }
-        }
-
-        selected_data=filter(d)
-
-        // call update functions of pie-chart and legend.
-        if (selected_data[1].length != 0) {
-          pC.update(selected_data[1], selection.value);
-          leg.update(selected_data[1]);
-          transmap.update(data, selection.value)
-        } else {
-          pC.update(selected_data[1], "No Data to show");
-          leg.update(selected_data[1], "No Data to show");
-          transmap.update(data, "No Data to show")
-        }
-
-      } else {
-        pC.update(tF, "Frequency of categories");
-        leg.update(tF);
-        transmap.update(data, selection.value)
-      }
-    });
-  selector.selectAll("option")
-    .data(elements)
-    .enter().append("option")
-    .attr("value", function(d){
-      return d;
-    })
-    .text(function(d){
-      return d;
-    })
+  dropdown()
 }
 
 // Close the dropdown menu if the user clicks outside of it
