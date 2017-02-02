@@ -43,3 +43,22 @@ In het weekend en vandaag ziek, dus niks gedaan ivm de hoofdpijn
 De kaart aangepast zodat ik nu onderscheid kan maken tussen aankomst en vertrekpunt, daarnaast lijnen getrokken tussen aankomst en vertrekpunten. Had hierbij wat problemen bij het transformeren van de verschillende coördinaten. Daarnaast buttons aangemaakt om in te zoomen op de specifieke steden.
 
 Morgen ervoor zorgen dat de drop-down ook echt functioneel is. Daarnaast bedacht dat het mooi zou zijn om in plaats van lijne pijlen te maken, zodat meteen duidelijk is wat vertrek en aankomstpunt is.
+
+## Dag 13
+Buttons aangemaakt voor het inzoomen voor de kaart, hierbij tegen het probleem aangelopen dat je niet telkens de kaart opnieuw wilt laden. Dit is uiteindelijk gelukt
+Ook een highlight toegevoegd aan de legenda waarneer over de piechart wordt gehoverd
+
+## Dag 14
+Om een hover functie in de kaart te maken noodzakelijk om alle cirkels in 1 grote svg te zetten. hiermee erg veel problemen gehad. Uiteindelijk gelukt om een titel toe toevoegen op de hover
+
+## Dag 15
+presentaties, paar kleine tips gehad
+
+## Dag 16
+Titel van de barchart interactie gegeven met de hover van de piechart, geeft nu als titel de categorie waarover in de piechart wordt gehoverd. Beetje begonnen met het stylen van mijn pagina
+
+## Dag 17
+heel veel bezig geweest met stylen, bug opgelost waarneer een item wordt geselecteerd in de dropdown, geeft dit nu duidelijk aan. Code begonnen opschonen
+
+## Dag 18
+Verslag geschreven, text voor op site geschreven. code verder opgeschoond
