@@ -17,22 +17,24 @@ function Zoom(zoominfo) {
   map.setOptions(myOptions);
 };
 
+function resize_marker(markername) {
+  d3.selectAll(markername)
+    .on("click", function(d) {
+      d3.selectAll('.marker').transition()
+        .duration(100)
+        .attr("r", 4.5)
+      d3.selectAll('.marker2').transition()
+        .duration(100)
+        .attr("r", 4.5)
+      d3.select(this).transition()
+        .duration(100)
+        .attr("r", 8)
+  });
+}
+
 function TransactionMap(data) {
 
-  function resize_marker(markername) {
-    d3.selectAll(markername)
-      .on("click", function(d) {
-        d3.selectAll('.marker').transition()
-          .duration(100)
-          .attr("r", 4.5)
-        d3.selectAll('.marker2').transition()
-          .duration(100)
-          .attr("r", 4.5)
-        d3.select(this).transition()
-          .duration(100)
-          .attr("r", 8)
-    });
-  }
+
   transmap = {}
   var bounds = new google.maps.LatLngBounds();
   d3.entries(data).forEach(function(d){
@@ -65,8 +67,6 @@ function TransactionMap(data) {
         .style('position','absolute')
         .style('left',sw.x+'px')
         .style('top',ne.y+'px');
-
-
 
       var line = layer.selectAll('.line')
         .data(d3.entries(data))

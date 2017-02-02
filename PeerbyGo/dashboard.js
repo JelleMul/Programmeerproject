@@ -354,10 +354,12 @@ function dashboard(id, fData, data){
       pC = pieChart(tF), // create the pie-chart.
       leg= legend(tF);  // create the legend.
 
+  // create the dropdown
   function dropdown() {
     var selector = d3.select(".dropdown")
       .append("select")
       .attr("id","dropdown")
+      // do something when using dropdown
       .on("change", function(d){
         selection = document.getElementById("dropdown");
         if (selection.value != "All timestamps") {
@@ -367,7 +369,7 @@ function dashboard(id, fData, data){
               d.push(selection.value, timedata[i].total)
             }
           }
-
+          // filter data on selected value
           selected_data=filter(d)
 
           // call update functions of pie-chart and legend.
@@ -376,12 +378,14 @@ function dashboard(id, fData, data){
             leg.update(selected_data[1]);
             transmap.update(data, selection.value)
           } else {
+            // update other visualisations
             pC.update(selected_data[1], "No Data to show");
             leg.update(selected_data[1], "No Data to show");
             transmap.update(data, "No Data to show")
           }
 
         } else {
+          // update other visualisations
           pC.update(tF, "Frequency of categories");
           leg.update(tF);
           transmap.update(data, selection.value)
@@ -397,6 +401,7 @@ function dashboard(id, fData, data){
         return d;
       })
   }
+  // put right options in dropdown
   var elements = []
   elements.push("All timestamps")
   for (i = 0; i < timedata.length; i++) {
