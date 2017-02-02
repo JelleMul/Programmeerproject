@@ -15,6 +15,21 @@ function Zoom(lat, lng, zoom) {
 };
 
 function TransactionMap(data) {
+
+  function resize_marker(markername) {
+    d3.selectAll(markername)
+      .on("click", function(d) {
+        d3.selectAll('.marker').transition()
+          .duration(100)
+          .attr("r", 4.5)
+        d3.selectAll('.marker2').transition()
+          .duration(100)
+          .attr("r", 4.5)
+        d3.select(this).transition()
+          .duration(100)
+          .attr("r", 8)
+    });
+  }
   transmap = {}
   var bounds = new google.maps.LatLngBounds();
   d3.entries(data).forEach(function(d){
@@ -114,31 +129,10 @@ function TransactionMap(data) {
           return ["product: "+d.value.productArchetype.locales.nl_NL[0]];
         });
 
-      d3.selectAll('.marker')
-        .on("click", function(d) {
-          d3.selectAll('.marker').transition()
-            .duration(100)
-            .attr("r", 4.5)
-          d3.selectAll('.marker2').transition()
-            .duration(100)
-            .attr("r", 4.5)
-          d3.select(this).transition()
-            .duration(100)
-            .attr("r", 8)
-      });
 
-      d3.selectAll('.marker2')
-        .on("click", function(d) {
-          d3.selectAll('.marker').transition()
-            .duration(100)
-            .attr("r", 4.5)
-          d3.selectAll('.marker2').transition()
-            .duration(100)
-            .attr("r", 4.5)
-          d3.select(this).transition()
-            .duration(100)
-            .attr("r", 8)
-        })
+      resize_marker('.marker')
+      resize_marker('marker2')
+      
 
 
       function transform(d) {

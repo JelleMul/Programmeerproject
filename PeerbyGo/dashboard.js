@@ -8,6 +8,8 @@ function sum( obj ) {
   return sum;
 }
 
+
+
 function dashboard(id, fData, data){
   var barColor = 'lightgreen';
   function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c",
@@ -15,6 +17,31 @@ function dashboard(id, fData, data){
   Moving:"#ff7f00", Office:"#cab2d6", Party:"#6a3d9a", Photo:"#8b0707", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3",
   boormachine:"#994499", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c", koningsdag:"#6633cc",
   oktoberfest:"#dc991f", partytent:"#fdbf6f", sinterklaas:"#dd4477"}[c]; }
+
+  function filter(d) {
+    var st = fData.filter(function(s){ return s.time == d[0];})[0]
+    typeList = [];
+    for (var key in st.categories) {
+      if (typeList.indexOf(key) == -1) {
+        typeList.push(key)
+      };
+    };
+    typeList.sort();
+
+    var nD = typeList.map(function(d) {
+      if (st.categories[d] != 0) {
+        return {type:d, freq: st.categories[d]}
+      }
+    });
+
+    for (i = 0; i < nD.length; i++) {
+      if (nD[i] == undefined) {
+        nD.splice(i, 1);
+        i--;
+      }
+    }
+    return [st, nD]
+  }
 
   // compute total for each state.
   fData.forEach(function(d){d.total = sum(d.categories)});
@@ -81,31 +108,10 @@ function dashboard(id, fData, data){
       function mouseover(d){  // utility function to be called on mouseover.
           // filter for selected timeblock.
 
-          var st = fData.filter(function(s){ return s.time == d[0];})[0]
-          typeList = [];
-          for (var key in st.categories) {
-            if (typeList.indexOf(key) == -1) {
-              typeList.push(key)
-            };
-          };
-          typeList.sort();
-
-          var nD = typeList.map(function(d) {
-            if (st.categories[d] != 0) {
-              return {type:d, freq: st.categories[d]}
-            }
-          });
-
-          for (i = 0; i < nD.length; i++) {
-            if (nD[i] == undefined) {
-              nD.splice(i, 1);
-              i--;
-            }
-          }
-
+          selected_data = filter(d);
           // call update functions of pie-chart and legend.
-          pC.update(nD, d[0]);
-          leg.update(nD);
+          pC.update(selected_data[1], d[0]);
+          leg.update(selected_data[1]);
       }
 
       function mouseout(d){    // utility function to be called on mouseout.
@@ -246,6 +252,24 @@ function dashboard(id, fData, data){
 
   // function to handle legend.
   function legend(lD){
+      function columns(tr) {
+        // create the first column for each segment.
+        tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
+            .attr("width", '16').attr("height", '16')
+            .attr("fill",function(d){ return segColor(d.type); });
+
+        // create the second column for each segment.
+        tr.append("td").attr("class",'LegendName')
+            .text(function(d){ return d.type;});
+
+        // create the third column for each segment.
+        tr.append("td").attr("class",'legendFreq')
+            .text(function(d){ return d3.format(",")(d.freq);});
+
+        // create the fourth column for each segment.
+        tr.append("td").attr("class",'legendPerc')
+            .text(function(d){ return getLegend(d,lD);});
+      }
       var leg = {};
 
       // create table for legend.
@@ -253,23 +277,8 @@ function dashboard(id, fData, data){
 
       // create one row per segment.s
       var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
-
-      // create the first column for each segment.
-      tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
-          .attr("width", '16').attr("height", '16')
-          .attr("fill",function(d){ return segColor(d.type); });
-
-      // create the second column for each segment.
-      tr.append("td").attr("class",'LegendName')
-          .text(function(d){ return d.type;});
-
-      // create the third column for each segment.
-      tr.append("td").attr("class",'legendFreq')
-          .text(function(d){ return d3.format(",")(d.freq);});
-
-      // create the fourth column for each segment.
-      tr.append("td").attr("class",'legendPerc')
-          .text(function(d){ return getLegend(d,lD);});
+      // create table
+      columns(tr)
 
       // Utility function to be used to update the legend.
       leg.update = function(nD, string){
@@ -283,22 +292,9 @@ function dashboard(id, fData, data){
           if (string == undefined) {
             // update the data attached to the row elements.
             var tr = legend.append("tbody").selectAll("tr").data(nD).enter().append("tr");
+            // create table
+            columns(tr)
 
-            tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
-                .attr("width", '16').attr("height", '16')
-                .attr("fill",function(d){ return segColor(d.type); });
-
-            // create the second column for each segment.
-            tr.append("td").attr("class",'LegendName')
-                .text(function(d){ return d.type;});
-
-            // create the third column for each segment.
-            tr.append("td").attr("class",'legendFreq')
-                .text(function(d){ return d3.format(",")(d.freq);});
-
-            // create the fourth column for each segment.
-            tr.append("td").attr("class",'legendPerc')
-                .text(function(d){ return getLegend(d,nD);});
           } else {
             legend.append("text")
             .text(string)
@@ -370,36 +366,16 @@ function dashboard(id, fData, data){
           }
         }
 
-        var st = fData.filter(function(s){ return s.time == d[0];})[0]
-        typeList = [];
-        for (var key in st.categories) {
-          if (typeList.indexOf(key) == -1) {
-            typeList.push(key)
-          };
-        };
-        typeList.sort();
-
-        var nD = typeList.map(function(d) {
-          if (st.categories[d] != 0) {
-            return {type:d, freq: st.categories[d]}
-          }
-        });
-
-        for (i = 0; i < nD.length; i++) {
-          if (nD[i] == undefined) {
-            nD.splice(i, 1);
-            i--;
-          }
-        }
+        selected_data=filter(d)
 
         // call update functions of pie-chart and legend.
-        if (nD.length != 0) {
-          pC.update(nD, selection.value);
-          leg.update(nD);
+        if (selected_data[1].length != 0) {
+          pC.update(selected_data[1], selection.value);
+          leg.update(selected_data[1]);
           transmap.update(data, selection.value)
         } else {
-          pC.update(nD, "No Data to show");
-          leg.update(nD, "No Data to show");
+          pC.update(selected_data[1], "No Data to show");
+          leg.update(selected_data[1], "No Data to show");
           transmap.update(data, "No Data to show")
         }
 
