@@ -17,9 +17,15 @@ In initialize.js wordt de data ingeladen en vervolgens omgezet naar het juiste f
 #### Dashboard.js
 Dashboard.js is opgedeeld in 3 belangrijke functies. De functie histoGram, pieChart en Legend. In Dashboard.js wordt in eerste instantie een kleur toegekent aan de verschillende categorieën, vervolgens worden de verschillende functies geïnitialiseerd. Vervolgens wordt met de functie typesToArray nog een kleine aanpassing aan de data om deze compatibel te maken voor de barchart.
 <br>
+<br>
 In de function histoGram wordt de staafgrafiek geïntialiseerd, hierin worden de bars toegevoegd, labels gemaakt e.d.. Daarnaast bevat hij 2 functies, mouseover en mouseout. In deze functies wordt de interactie met de piechart en de legenda geregeld door het aanroepen van hun update functions. De update function van de staafgrafiek bestaat uit het aanpassen van de bars aan 1 specifieke categorie waarneer over de cirkeldiagram wordt gehoverd.
 <br>
-In de function pieChart 
+<br>
+De function pieChart heeft een soortgelijke opbouw als de histogram, in eerste instantie wordt de piechart aangemaakt. De mouseover en mouseout beschrijven de hover functies van de piechart waarin de highligth function van de legenda wordt aangeroepen. De update functie werkt anders dan die van de barchart. Hierbij worden alle paths van de piechart verwijdert waarna hij weer wordt opgebouwd met de nieuwe data waarbij de barchart een transitie heeft van de oude data naar de nieuwe data.
+<br>
+<br>
+Voor de function legend geld weer een soortgelijke opbouw, uniek hieraan is dat deze zowel een update functie heeft als een highlight functie. De update functie wordt aangeroepen waarneer 1 specifieke timestamp wordt geselecteerd met de dropdown, of mouseover van de barchart. De highlight functie wordt aangeroepen door de mouseover van de piechart waarna de categorie oplicht in de legenda.
+
 
 
 

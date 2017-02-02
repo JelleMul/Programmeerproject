@@ -307,26 +307,20 @@ function dashboard(id, fData, data){
             .style("font-weight", "bold")
           }
       }
-
+      // highlight row of the categorie with color
       leg.highlight = function(categorie, color){
         d3.selectAll("tr").filter(function() {
           return this.innerText.startsWith(categorie)
           })
           .style("background-color", color)
       }
-
-      function getLegend(d,aD){ // Utility function to compute percentage.
+      // Utility function to compute percentage.
+      function getLegend(d,aD){
           return d3.format("%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
       }
-
       return leg;
-
   }
-
-  // calculate total frequency by segment for all state.
-
-  counter = 1
-
+  // calculate total frequency by segment for all timestamps.
   function typesToArray(data) {
     typeList = [];
     for (i = 0; i < data.length; i++){
