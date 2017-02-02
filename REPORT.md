@@ -43,6 +43,9 @@ De barchart zou in eerste instantie een maat zijn voor het aantal transacties, u
 <br>
 <br>
 Een grote uitdaging was het aanpassen van de legenda, dit is uiteindelijk helemaal goed gelukt door beter te snappen hoe elementen exact kunnen worden geselecteerd.
+<br>
+<br>
+Een ander obstakel wat al in de eerste week aan bod kwam, was het probleem van de privacy van de klanten van peerby. Daarom kreeg ik een beperkte dataset met random datums en onnauwkeurige lengte en breedtegraden. De visualisaties is met deze data gemaakt, dus slaat in theorie "nergens" op, maar kan met echte data ook goed functioneren.
 
 ### Redenering achter mijn keuzes
 Het eerste probleem van de kaart was enigszins te wijten aan het gebruik van d3 in combinatie met google maps. Voor dit project was deze oplossing het beste, echter zou ik normaal gesproken gekozen hebben om gebruik te maken van de google maps api voor het trekken van lijnen. Naast dat dit zeer makkelijk een transistie is, kunnen deze ook nog over de weg worden getrokken. De toevoeging van de dropdown was hierbij een goede aanvulling waardoor nog wel de mogelijkheid bestaat om te filteren op verschillende tijdzones. Plus zou ik dan nog een toevoeging doen om de kaart meer te laten interacteren met de legenda en barchart waarneer over een punt wordt gehoverd.

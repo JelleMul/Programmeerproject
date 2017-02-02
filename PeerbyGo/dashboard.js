@@ -12,6 +12,17 @@ function sum( obj ) {
   return sum;
 }
 
+// change the string of time to a range of time like 12:00 to 12:00-18:00
+function changeString (oldtime) {
+  string = oldtime.split(" ")
+  string = string[1].split(":")
+  string = parseInt(string)
+  string = string + 6
+  string = string.toString()
+  string = string.concat(":00")
+  string = oldtime.concat("-").concat(string)
+  return string
+}
 
 
 function dashboard(id, fData, data){
@@ -116,8 +127,9 @@ function dashboard(id, fData, data){
           // filter for selected timeblock.
 
           selected_data = filter(d);
+          string = changeString (d[0])
           // call update functions of pie-chart and legend.
-          pC.update(selected_data[1], d[0]);
+          pC.update(selected_data[1], string);
           leg.update(selected_data[1]);
       }
 
@@ -199,6 +211,7 @@ function dashboard(id, fData, data){
         var piesvg = d3.select('#piechart')
             .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
             .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
+
 
         // append title to piechart
         piesvg.append("text")
@@ -374,7 +387,8 @@ function dashboard(id, fData, data){
 
           // call update functions of pie-chart and legend.
           if (selected_data[1].length != 0) {
-            pC.update(selected_data[1], selection.value);
+            string = changeString (selection.value)
+            pC.update(selected_data[1], string);
             leg.update(selected_data[1]);
             transmap.update(data, selection.value)
           } else {
@@ -398,7 +412,11 @@ function dashboard(id, fData, data){
         return d;
       })
       .text(function(d){
-        return d;
+        if (d != "All timestamps") {
+          return changeString(d);
+        } else {
+          return d;
+        }
       })
   }
   // put right options in dropdown
