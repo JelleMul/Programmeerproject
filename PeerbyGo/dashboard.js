@@ -1,6 +1,10 @@
 // Jelle Mul
 // 11402148
 
+// import source
+// http://bl.ocks.org/NPashaP/96447623ef4d342ee09b for bar and piechart
+
+
 // sums all categories in object
 function sum( obj ) {
   var sum = 0;

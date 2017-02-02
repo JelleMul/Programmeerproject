@@ -1,6 +1,12 @@
 // Jelle Mul
 // 11402148
 
+// import sources
+// https://bl.ocks.org/mbostock/899711 for d3 overlay
+//
+
+
+// initialize the google maps
 var map = new google.maps.Map(d3.select("#map").node(), {
   zoom: 9,
   zoomcontrol: true,
@@ -9,6 +15,7 @@ var map = new google.maps.Map(d3.select("#map").node(), {
   scrollwheel: false
 });
 
+// zoom to certain city
 function Zoom(zoominfo) {
   var myOptions = {
     zoom: zoominfo[2],
@@ -17,6 +24,7 @@ function Zoom(zoominfo) {
   map.setOptions(myOptions);
 };
 
+// makes clicked marker bigger and set all others to small
 function resize_marker(markername) {
   d3.selectAll(markername)
     .on("click", function(d) {
@@ -33,9 +41,8 @@ function resize_marker(markername) {
 }
 
 function TransactionMap(data) {
-
-
   transmap = {}
+  // make bounds for the svg
   var bounds = new google.maps.LatLngBounds();
   d3.entries(data).forEach(function(d){
     bounds.extend(d.value.lat_lng = new google.maps.LatLng(d.value.contactInfo.geolocation.lat, d.value.contactInfo.geolocation.lng));
@@ -43,6 +50,7 @@ function TransactionMap(data) {
   });
   map.fitBounds(bounds);
 
+  // create overlay for d3 options
   var overlay = new google.maps.OverlayView(),
       r = 4.5,
       padding = r*2;
@@ -61,6 +69,7 @@ function TransactionMap(data) {
       ne.x += padding;
       ne.y -= padding;
 
+      // set attributes of layer
       d3.select('.transactions')
         .attr('width',(ne.x - sw.x) + 'px')
         .attr('height',(sw.y - ne.y) + 'px')
@@ -68,6 +77,7 @@ function TransactionMap(data) {
         .style('left',sw.x+'px')
         .style('top',ne.y+'px');
 
+      // draw lines from start to end
       var line = layer.selectAll('.line')
         .data(d3.entries(data))
         .each(transform3)
@@ -96,6 +106,7 @@ function TransactionMap(data) {
           return ["product: "+d.value.productArchetype.locales.nl_NL[0]];
         });
 
+      // draw red markes
       var marker = layer.selectAll('.marker')
         .data(d3.entries(data))
         .each(transform)
@@ -114,6 +125,7 @@ function TransactionMap(data) {
           return ["product: "+d.value.productArchetype.locales.nl_NL[0]];
         })
 
+      // draw blue markers
       var marker2 = layer.selectAll('.marker2')
         .data(d3.entries(data))
         .each(transform2)
@@ -132,12 +144,11 @@ function TransactionMap(data) {
           return ["product: "+d.value.productArchetype.locales.nl_NL[0]];
         });
 
-
+      // functions to resize markers on click
       resize_marker('.marker')
-      resize_marker('marker2')
+      resize_marker('.marker2')
 
-
-
+      // transform for red markers
       function transform(d) {
         d = projection.fromLatLngToDivPixel(d.value.lat_lng);
         return d3.select(this)
@@ -145,6 +156,7 @@ function TransactionMap(data) {
           .attr('cy',d.y-ne.y);
       }
 
+      // transform for blue markers
       function transform2(d) {
         d = projection.fromLatLngToDivPixel(d.value.lat_lng_supp);
         return d3.select(this)
@@ -152,6 +164,7 @@ function TransactionMap(data) {
           .attr('cy',d.y-ne.y);
       }
 
+      // transform for end points
       function transform3(d) {
         d = projection.fromLatLngToDivPixel(d.value.lat_lng_supp);
         return d3.select(this)
@@ -159,6 +172,7 @@ function TransactionMap(data) {
           .attr('y1',d.y-ne.y);
       }
 
+      // transform for starting points
       function transform4(d) {
         d = projection.fromLatLngToDivPixel(d.value.lat_lng);
         return d3.select(this)
@@ -168,9 +182,12 @@ function TransactionMap(data) {
     };
   };
 
+  // update for map, called in dropdown
   transmap.update = function(data, timestamp) {
+    // create deepcopy of data
     var copydata = JSON.parse(JSON.stringify(data));
     if (timestamp != "All timestamps" && timestamp != "No Data to show") {
+      // set string to readable string for new date
       timestamp = ([timestamp.slice(0, 0), "2011-", timestamp.slice(0)].join('').replace(' ','T').split('T'))
       timestamp[1] = timestamp[1].concat(":00.000Z")
       timestamp[0] = timestamp[0].split('-')
@@ -178,23 +195,27 @@ function TransactionMap(data) {
       timestamp = [timestamp.slice(0, 4), "-", timestamp.slice(4)].join('');
       timestamp = [timestamp.slice(0, 7), "-", timestamp.slice(7)].join('');
       timestamp = [timestamp.slice(0, 10), "T", timestamp.slice(10)].join('');
-
+      // create date
       timestamp = new Date(timestamp)
       timestamp2 = timestamp
       timestamp3 = new Date(timestamp2.setHours(timestamp2.getHours() + 6))
       timestamp = new Date(timestamp.setHours(timestamp.getHours() - 6))
+      // select right mapdata from copydata based on the dateobject
       for(i = 0; i < copydata.length; i++) {
         delivery = new Date(copydata[i].delivery.start)
+        // remove all data who do not correspond to the timestamp
         if ((delivery.getTime() > timestamp.getTime() && delivery.getTime() < timestamp3.getTime()) == false) {
           copydata.splice(i, 1);
           i--;
         }
       }
     }
+    // remove all current markers and lines
     d3.selectAll(".line").remove()
     d3.selectAll(".marker").remove()
     d3.selectAll(".marker2").remove()
     d3.selectAll(".transactions").remove()
+    // create new overlay in any data is present
     if (timestamp != "No Data to show"){
       TransactionMap(copydata)
     }

@@ -1,11 +1,13 @@
 /* Jelle Mul
 11402148 */
 
+/* Set background color and font*/
 body {
   background-color: lightblue;
   font-family: 'Open Sans', sans-serif;
 }
 
+/* container in middle of page*/
 #container {
   width: 1200px;
   height: 500px;
@@ -13,6 +15,7 @@ body {
   background-color: rgb(89,152,229)
 }
 
+/* menubar in whole container*/
 #navbar {
   width: 100%;
 }
@@ -27,7 +30,7 @@ ul {
 li {
     float: left;
 }
-
+/* text options menubar*/
 li a {
     display: block;
     font-family: 'Open Sans', sans-serif;
@@ -37,11 +40,12 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
+/* Change the link color to blue on hover */
 li a:hover {
     background-color: blue;
 }
 
+/* image on top of page*/
 img {
   margin-top: 20px;
   margin-left: 25px;
@@ -67,12 +71,14 @@ img {
   font-size: 20px;
 }
 
+/* set left and right div next to eachother*/
 #leftdiv {
   margin-left: 25px;
   width:45%;
   float: left;
 }
 
+/* set left and right div next to eachother*/
 #rightdiv {
   margin-right: 25px;
   width:45%;
@@ -84,6 +90,7 @@ h2 {
   color:white;
   text-align: center;
 }
+/* let text fill whole lines*/
 p {
   text-align: justify;
 }

@@ -1,11 +1,13 @@
 /* Jelle Mul
 11402148 */
 
+/* Set background color and font*/
 body {
   background-color: lightblue;
   font-family: 'Open Sans', sans-serif;
 }
 
+/* container in middle of page*/
 #container {
   width: 1200px;
   height: 1500px;
@@ -13,21 +15,25 @@ body {
   background-color: rgb(89,152,229)
 }
 
+
 #wrapper {
   height: 850px;
 }
 
+/* set left and right next to eachother*/
 #wrapper-left {
   float: left;
   height: 850px;
 }
 
+/* set left and right next to eachother*/
 #wrapper-right {
   float:right;
   width: 890px;
   height: 850px;
 }
 
+/* navbar on whole container*/
 #navbar {
   width: 100%;
 }
@@ -57,6 +63,7 @@ li a:hover {
     background-color: blue;
 }
 
+/* bar for buttons*/
 #buttons {
   margin-top: 25px;
   margin-left: 25px;
@@ -67,8 +74,9 @@ li a:hover {
   background-color: #003399;
 }
 
+/* buttons same color as bar */
 button {
-    background-color: #003399; /* Green */
+    background-color: #003399;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -79,11 +87,13 @@ button {
     font-size: 16px;
 }
 
+/* change color on hover */
 button:hover {
   cursor: pointer;
   background-color: blue;
 }
 
+/* position for map */
 #map {
   width: 90%;
   height: 400px;
@@ -94,6 +104,7 @@ button:hover {
   margin-top: 0px;
 }
 
+/* position for image */
 img {
   margin-top: 20px;
   margin-left: 25px;
@@ -102,26 +113,31 @@ img {
   max-height: 30%;
 }
 
+/* red markers */
 .marker {
-  fill: brown;
+  fill: red;
   stroke: black;
   stroke-width: 1.5px;
 }
 
+/* blue makers */
 .marker2 {
   fill: blue;
   stroke: black;
   stroke-width: 1.5px;
 }
 
+/* change pointer on hover */
 .marker:hover {
   cursor: pointer;
 }
 
+/* change pointer on hover */
 .marker2:hover {
   cursor: pointer;
 }
 
+/* change pointer on hover */
 .line:hover {
   cursor: pointer;
 }
@@ -136,6 +152,7 @@ img {
   margin-left: 25px;
 }
 
+/* position of dashboard */
 #dashboard {
   margin-top: 20px;
   margin-left: 25px;
@@ -143,12 +160,14 @@ img {
   float: right;
 }
 
+/* position for legend */
 #tablediv {
   margin-left: 25px;
   margin-top: 50px;
   float: left;
 }
 
+/* settings of barchart */
 path {  stroke: #fff; }
 path:hover {  opacity:0.8; }
 rect:hover {  fill:blue; }
@@ -156,6 +175,7 @@ rect:hover {  fill:blue; }
 .legend tr{    border-bottom:1px solid grey; }
 .legend tr:first-child{    border-top:1px solid grey; }
 
+/* no axis line of barchart */
 .axis path,
 .axis line {
   fill: none;
@@ -164,6 +184,7 @@ rect:hover {  fill:blue; }
 }
 
 .x.axis path {  display: none; }
+/* settings for legend */
 .legend{
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
@@ -190,14 +211,17 @@ rect:hover {  fill:blue; }
   max-height: none;
 }
 
+/* set barchart right */
 #barchart {
   float:right;
 }
 
+/* set piechart right */
 #piechart {
   float:right;
 }
 
+/* visuals of dropdown standard look */
 .styled-select {
   margin-top: 40px;
   margin-left: 40px;
@@ -206,6 +230,7 @@ rect:hover {  fill:blue; }
    width: 240px;
 }
 
+/* visuals of actual dropdown */
 .styled-select select {
    background: #003399;
    opacity: 1;
@@ -225,7 +250,6 @@ rect:hover {  fill:blue; }
 .blue    { background-color: #003399; }
 
 .blue select    { color: white; }
-
 
 
 #info {
@@ -252,7 +276,6 @@ rect:hover {  fill:blue; }
   max-width: 45%;
   margin-right: 25px;
 }
-
 
 #info3 {
   text-align: justify;;
