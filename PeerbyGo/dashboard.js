@@ -10,7 +10,10 @@ function sum( obj ) {
 
 function dashboard(id, fData, data){
   var barColor = 'lightgreen';
-  function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c", Entertainment:"#dd4477", Garden: "#fb9a99", Home_improvement:"#e31a1c", Ironwork:"#22aa99", Kitchen:"#fdbf6f", Moving:"#ff7f00", Office:"#cab2d6", Party:"#6a3d9a", Photo:"#8b0707", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3", boormachine:"#994499", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c", koningsdag:"#6633cc", oktoberfest:"#dc991f", partytent:"#fdbf6f", sinterklaas:"#dd4477"}[c]; }
+  function segColor(c){ return {Christmas:"#a6cee3", Cooking:"#1f78b4", Cycling:"#b2df8a", Electronics:"#33a02c",
+  Entertainment:"#dd4477", Garden: "#fb9a99", Home_improvement:"#e31a1c", Ironwork:"#22aa99", Kitchen:"#fdbf6f", Moving:"#ff7f00", Office:"#cab2d6",
+  Party:"#6a3d9a", Photo:"#8b0707", TV:"#ffff99", Video:"#b15928", Woodwork:"#a6cee3", boormachine:"#994499", festival:"#1f78b4", game_night:"#b2df8a", going_outside:"#33a02c",
+  koningsdag:"#6633cc", oktoberfest:"#dc991f", partytent:"#fdbf6f", sinterklaas:"#dd4477"}[c]; }
 
   // compute total for each state.
   fData.forEach(function(d){d.total = sum(d.categories)});
