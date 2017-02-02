@@ -6,10 +6,10 @@ var map = new google.maps.Map(d3.select("#map").node(), {
   scrollwheel: false
 });
 
-function Zoom(lat, lng, zoom) {
+function Zoom(zoominfo) {
   var myOptions = {
-    zoom: zoom,
-    center: {lat:lat, lng: lng}
+    zoom: zoominfo[2],
+    center: {lat:zoominfo[0], lng: zoominfo[1]}
   }
   map.setOptions(myOptions);
 };
@@ -132,7 +132,7 @@ function TransactionMap(data) {
 
       resize_marker('.marker')
       resize_marker('marker2')
-      
+
 
 
       function transform(d) {

@@ -11,7 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9PE7GyR-Rn9u3_ZWiTUf43-yr4hTIzC0"></script>
     <script src="//d3js.org/d3.v3.min.js"></script>
-    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
   </head>
   <body>
@@ -35,10 +34,10 @@
         </div>
         <div id="wrapper-right">
           <div id="buttons">
-            <button id="Amsterdam" type="button" onclick="Zoom(52.375554, 4.895792, 12)">Zoom to Amsterdam</button>
-            <button id="Utrecht" type="button" onclick="Zoom(52.093585, 5.072312, 12)">Zoom to Utrecht</button>
-            <button id="Rotterdam" type="button" onclick="Zoom(51.933838, 4.531922, 12)">Zoom to Rotterdam</button>
-            <button id="Original" type="button" onclick="Zoom(52.161555, 4.859314, 9)">Whole map</button>
+            <button id="Amsterdam" type="button" onclick="Zoom([52.375554, 4.895792, 12])">Zoom to Amsterdam</button>
+            <button id="Utrecht" type="button" onclick="Zoom([52.093585, 5.072312, 12])">Zoom to Utrecht</button>
+            <button id="Rotterdam" type="button" onclick="Zoom([51.933838, 4.531922, 12])">Zoom to Rotterdam</button>
+            <button id="Original" type="button" onclick="Zoom([52.161555, 4.859314, 9])">Whole map</button>
           </div>
           <div id="map"></div>
           <div id="dashboard"></div>
